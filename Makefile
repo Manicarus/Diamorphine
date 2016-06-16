@@ -9,7 +9,7 @@
 # clean:
 # 	$(MAKE) -C $(KDIR) M=$(PWD) clean
 
-obj-m := edukit.o
+obj-m := simplekit.o
 CC = gcc -Wall
 KDIR := /lib/modules/$(shell uname -r)/build
 PWD := $(shell pwd)

